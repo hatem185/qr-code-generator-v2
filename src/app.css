@@ -1,0 +1,462 @@
+:root {
+  --image-dim: 45px;
+}
+
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Form Styles */
+#qr-form-generator {
+  border: 1px solid #e04545;
+  border-radius: 8px;
+  padding: 25px;
+  max-width: 350px;
+  margin: 50px auto 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#qr-form-generator select,
+#qr-form-generator input {
+  border: 1px solid #d24444;
+  border-radius: 4px;
+  padding: 0px 16px;
+  height: 35px;
+  outline: none;
+}
+
+#client-qr-code {
+  cursor: default;
+}
+
+.label-text {
+  font-weight: 500;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#latest-code-btn {
+  background-color: rgb(210, 68, 68);
+  cursor: pointer;
+  border: white;
+  border-radius: 4px;
+  color: white;
+  padding: 5px;
+}
+
+#serial-number-input-wrapper {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#serial-number-input-wrapper input {
+  flex: 1;
+}
+
+#generate-button {
+  background-color: rgb(210, 68, 68);
+  cursor: pointer;
+  border: white;
+  border-radius: 4px;
+  color: white;
+  padding: 16px;
+}
+
+#latest-code-btn:active,
+#generate-button:active {
+  scale: 1.05;
+}
+
+/* Format Switchers */
+.format-switcher {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background-color: #fff8e1;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.format-select {
+  border: 1px solid #ffc107;
+  border-radius: 4px;
+  padding: 8px 16px;
+  height: 35px;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: white;
+}
+
+.format-hint {
+  margin: 8px 0 0 0;
+  padding: 8px;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #666;
+  border-left: 3px solid #ffc107;
+}
+
+.format-hint code {
+  background-color: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #d24444;
+  word-break: break-all;
+}
+
+/* Layout Switchers */
+#box-layout-switcher {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+#custom-layout-switcher {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background-color: #f0f8ff;
+  border: 1px solid #4a90e2;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.layout-select {
+  border: 1px solid #d24444;
+  border-radius: 4px;
+  padding: 8px 16px;
+  height: 35px;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Custom Options */
+#custom-options-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background-color: #f0f8ff;
+  border: 2px solid #4a90e2;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.custom-format-info {
+  text-align: center;
+  padding: 8px;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.custom-format-info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #333;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.custom-format-info strong {
+  color: #d24444;
+}
+
+.format-example {
+  font-size: 12px !important;
+  color: #666 !important;
+  font-style: italic;
+}
+
+.custom-inputs-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.custom-inputs-row .input-wrapper {
+  flex: 1;
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+.custom-inputs-row input {
+  text-transform: uppercase;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* Print Styles */
+@media print {
+  * {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    background-color: white !important;
+  }
+  
+  main {
+    width: auto !important;
+  }
+  
+  /* Hide all non-QR elements */
+  .dont-print,
+  header,
+  .history-list-container,
+  hr,
+  #qr-form-generator,
+  .alert-message,
+  .lds-dual-ring,
+  #show-all-page,
+  #page-switcher {
+    display: none !important;
+  }
+  
+  /* Ensure main content takes full width */
+  #main-content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* QR Code Container - Print Layout */
+  #qr-code-container {
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 0 !important;
+    align-items: flex-start;
+    align-content: flex-start;
+  }
+  
+  /* Hide the wrapper div around QR container if needed */
+  .qr-display-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  
+  /* Ensure QR items are visible */
+  .qr-code-item {
+    display: flex !important;
+  }
+  
+  /* Orders QR Code Layout - Fixed for print stability */
+  .qr-code-item {
+    width: 50% !important;
+    height: 320px !important;
+    min-height: 320px !important;
+    max-height: 320px !important;
+    background-color: rgb(255, 255, 255) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    page-break-inside: avoid !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+  
+  /* Force page break after every 6 items (3 rows × 2 columns) */
+  .qr-code-item:nth-child(6n) {
+    page-break-after: always !important;
+  }
+  
+  /* Prevent orphaned items */
+  .qr-code-item:nth-child(6n-5) {
+    page-break-before: avoid !important;
+  }
+  
+  /* Ensure first page doesn't have extra space */
+  .qr-code-item:first-child {
+    page-break-before: avoid !important;
+  }
+  
+  /* Grid Layout (3x2 - 6 per page) - Default */
+  .qr-code-item-box.layout-grid {
+    align-items: center !important;
+    justify-content: center !important;
+    width: calc(100% / 2) !important;
+    height: calc(100vh / 3) !important;
+    padding: 10px !important;
+    page-break-inside: avoid;
+    border: 1px dashed #ccc !important;
+    box-sizing: border-box !important;
+  }
+  
+  .qr-code-item-box.layout-grid:nth-child(even) {
+    padding-left: 10px !important;
+  }
+  
+  .qr-code-item-box.layout-grid:nth-child(6n) {
+    page-break-after: always;
+  }
+  
+  .qr-code-item-box.layout-grid .qr-code-wrapper-box img {
+    margin: 0 !important;
+    width: 280px !important;
+    height: 280px !important;
+  }
+  
+  .qr-code-item-box.layout-grid .qr-code-text-box {
+    font-size: 1.8rem !important;
+    margin: 10px 0 0 0 !important;
+    text-align: center;
+  }
+  
+  /* Single Layout (1 per page) */
+  .qr-code-item-box.layout-single {
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    height: auto !important;
+    padding: 40px 20px !important;
+    page-break-before: always !important;
+    page-break-after: always !important;
+    page-break-inside: avoid !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+  }
+  
+  /* Ensure first item doesn't have extra page break before */
+  .qr-code-item-box.layout-single:first-child {
+    page-break-before: avoid !important;
+  }
+  
+  .qr-code-item-box.layout-single .qr-code-wrapper-box {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  
+  .qr-code-item-box.layout-single .qr-code-wrapper-box img {
+    margin: 0 auto !important;
+    width: 500px !important;
+    height: 500px !important;
+    display: block !important;
+  }
+  
+  .qr-code-item-box.layout-single .qr-code-text-box {
+    font-size: 4rem !important;
+    margin: 30px 0 0 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  
+  /* Orders QR Code Wrapper - Centered layout */
+  .qr-code-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .qr-code-wrapper img {
+    margin: 0 auto !important;
+    width: 150px !important;
+    height: 150px !important;
+    display: block !important;
+  }
+  
+  .qr-code-text {
+    margin: 8px 0 0 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+  }
+  
+  /* Box QR Code Wrapper */
+  .qr-code-wrapper-box {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* Prevent overflow and clipping */
+  .qr-code-item-box.layout-single .qr-code-wrapper-box {
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+}
+
+@page {
+  margin: 15mm;
+  size: auto;
+}
+
+@page :first {
+  margin-top: 15mm;
+}
+
