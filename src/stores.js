@@ -47,6 +47,15 @@ export const showLoadingIndicator = writable(false);
 export const alertMessage = writable({ message: "", type: "" });
 export const showAllPages = writable(false);
 
+// Print position offsets (in mm)
+export const printOffsetTop = writable(0);
+export const printOffsetLeft = writable(0);
+
+// Per-row vertical offsets (in mm)
+export const printRowOffset1 = writable(0);
+export const printRowOffset2 = writable(0);
+export const printRowOffset3 = writable(0);
+
 // Derived stores
 export const isBoxType = derived(qrType, $qrType => $qrType.toLowerCase() === "box");
 export const isCustomType = derived(qrType, $qrType => $qrType.toLowerCase() === "custom");

@@ -268,10 +268,12 @@ ul {
     padding: 0 !important;
   }
   
-  /* QR Code Container - Print Layout */
+  /* QR Code Container - Print Layout with position offsets */
   #qr-code-container {
     overflow: visible !important;
     margin: 0 !important;
+    margin-top: var(--print-offset-top, 0mm) !important;
+    margin-left: var(--print-offset-left, 0mm) !important;
     padding: 0 !important;
     width: 100% !important;
     display: flex !important;
@@ -310,6 +312,25 @@ ul {
     box-sizing: border-box !important;
     position: relative !important;
     overflow: visible !important;
+  }
+  
+  /* Per-row vertical offsets */
+  /* Row 1: items 1,2 of each page (6n+1, 6n+2) */
+  .qr-code-item:nth-child(6n+1),
+  .qr-code-item:nth-child(6n+2) {
+    margin-top: var(--print-row1-offset, 0mm) !important;
+  }
+  
+  /* Row 2: items 3,4 of each page (6n+3, 6n+4) */
+  .qr-code-item:nth-child(6n+3),
+  .qr-code-item:nth-child(6n+4) {
+    margin-top: var(--print-row2-offset, 0mm) !important;
+  }
+  
+  /* Row 3: items 5,6 of each page (6n+5, 6n aka 6n+6) */
+  .qr-code-item:nth-child(6n+5),
+  .qr-code-item:nth-child(6n) {
+    margin-top: var(--print-row3-offset, 0mm) !important;
   }
   
   /* Force page break after every 6 items (3 rows × 2 columns) */

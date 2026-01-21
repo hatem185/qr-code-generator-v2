@@ -38,6 +38,7 @@
   import Header from './lib/components/Header.svelte';
   import History from './lib/components/History.svelte';
   import QRForm from './lib/components/QRForm.svelte';
+  import PrintOffsetControls from './lib/components/PrintOffsetControls.svelte';
   import AlertMessage from './lib/components/AlertMessage.svelte';
   import LoadingIndicator from './lib/components/LoadingIndicator.svelte';
   import QRDisplay from './lib/components/QRDisplay.svelte';
@@ -276,7 +277,10 @@
   <hr style="margin: 25px" class="dont-print" />
   
   <div id="main-content">
-    <QRForm onGenerate={generateQRCodes} />
+    <div class="form-controls-row dont-print">
+      <QRForm onGenerate={generateQRCodes} />
+      <PrintOffsetControls />
+    </div>
     <AlertMessage />
     <LoadingIndicator />
     <QRDisplay qrCodes={generatedQRCodes} />
@@ -300,6 +304,14 @@
   #main-content {
     width: 85%;
     margin: auto;
+  }
+
+  .form-controls-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
   }
 </style>
 
