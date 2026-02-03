@@ -5,7 +5,8 @@
     printOffsetLeft,
     printRowOffset1,
     printRowOffset2,
-    printRowOffset3
+    printRowOffset3,
+    printColumnGap
   } from '../../stores';
   import { saveToStorage, loadFromStorage } from '../utils';
 
@@ -14,6 +15,7 @@
   function handleOffsetChange() {
     saveToStorage('printOffsetTop', $printOffsetTop.toString());
     saveToStorage('printOffsetLeft', $printOffsetLeft.toString());
+    saveToStorage('printColumnGap', $printColumnGap.toString());
     applyOffsets();
   }
 
@@ -28,6 +30,8 @@
     // Global offsets
     document.documentElement.style.setProperty('--print-offset-top', `${$printOffsetTop}mm`);
     document.documentElement.style.setProperty('--print-offset-left', `${$printOffsetLeft}mm`);
+    // Column gap
+    document.documentElement.style.setProperty('--print-column-gap', `${$printColumnGap}mm`);
     // Per-row offsets
     document.documentElement.style.setProperty('--print-row1-offset', `${$printRowOffset1}mm`);
     document.documentElement.style.setProperty('--print-row2-offset', `${$printRowOffset2}mm`);
@@ -37,6 +41,7 @@
   function reset() {
     printOffsetTop.set(0);
     printOffsetLeft.set(0);
+    printColumnGap.set(0);
     printRowOffset1.set(0);
     printRowOffset2.set(0);
     printRowOffset3.set(0);
@@ -52,8 +57,10 @@
     // Load global offsets
     const savedTop = loadFromStorage('printOffsetTop');
     const savedLeft = loadFromStorage('printOffsetLeft');
+    const savedColumnGap = loadFromStorage('printColumnGap');
     if (savedTop) printOffsetTop.set(parseFloat(savedTop));
     if (savedLeft) printOffsetLeft.set(parseFloat(savedLeft));
+    if (savedColumnGap) printColumnGap.set(parseFloat(savedColumnGap));
     
     // Load per-row offsets
     const savedRow1 = loadFromStorage('printRowOffset1');
@@ -91,6 +98,18 @@
           bind:value={$printOffsetLeft} 
           on:change={handleOffsetChange}
           step="1"
+        />
+      </label>
+    </div>
+    <div class="offset-row">
+      <label>
+        <span>↔ Column Gap (mm):</span>
+        <input 
+          type="number" 
+          bind:value={$printColumnGap} 
+          on:change={handleOffsetChange}
+          step="1"
+          min="0"
         />
       </label>
     </div>

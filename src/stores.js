@@ -56,6 +56,9 @@ export const printRowOffset1 = writable(0);
 export const printRowOffset2 = writable(0);
 export const printRowOffset3 = writable(0);
 
+// Horizontal spacing between columns (in mm)
+export const printColumnGap = writable(0);
+
 // Derived stores
 export const isBoxType = derived(qrType, $qrType => $qrType.toLowerCase() === "box");
 export const isCustomType = derived(qrType, $qrType => $qrType.toLowerCase() === "custom");
