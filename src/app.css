@@ -389,14 +389,16 @@ ul {
     text-align: center;
   }
   
-  /* Single Layout (1 per page) */
-  .qr-code-item-box.layout-single {
-    align-items: center !important;
-    justify-content: center !important;
+  /* Single Layout (1 per page) - Override base .qr-code-item rules */
+  .qr-code-item.qr-code-item-box.layout-single {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
     width: 100% !important;
-    min-height: 100vh !important;
     height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
     padding: 40px 20px !important;
+    margin: 0 !important;
     page-break-before: always !important;
     page-break-after: always !important;
     page-break-inside: avoid !important;
@@ -405,16 +407,18 @@ ul {
   }
   
   /* Ensure first item doesn't have extra page break before */
-  .qr-code-item-box.layout-single:first-child {
+  .qr-code-item.qr-code-item-box.layout-single:first-child {
     page-break-before: avoid !important;
   }
   
-  .qr-code-item-box.layout-single .qr-code-wrapper-box {
+  .qr-code-item.qr-code-item-box.layout-single .qr-code-wrapper-box {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     width: 100% !important;
+    margin-top: var(--print-offset-top, 0mm) !important;
+    margin-left: var(--print-offset-left, 0mm) !important;
   }
   
   .qr-code-item-box.layout-single .qr-code-wrapper-box img {

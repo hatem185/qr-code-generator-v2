@@ -86,23 +86,23 @@
   <h2 style="margin: 16px 16px 0">Generated History List</h2>
   <ul id="history-list">
     {#each displayedHistory as item (item._id || item.id)}
-      <li 
-        class="history-card" 
-        on:click={() => handleHistoryClick(item)}
-        on:keypress={(e) => e.key === 'Enter' && handleHistoryClick(item)}
-        role="button"
-        tabindex="0"
-      >
-        <h3 style="color: {getTypeColor(item.type)}">{item.type}</h3>
-        <h4>First code: {item.first_code}</h4>
-        <h4>Last code: {item.last_code}</h4>
-        <h4>Created At: {formatTimestamp(item.createdAt)}</h4>
+      <li class="history-card">
+        <button 
+          type="button"
+          class="history-card-btn"
+          on:click={() => handleHistoryClick(item)}
+        >
+          <h3 style="color: {getTypeColor(item.type)}">{item.type}</h3>
+          <h4>First code: {item.first_code}</h4>
+          <h4>Last code: {item.last_code}</h4>
+          <h4>Created At: {formatTimestamp(item.createdAt)}</h4>
+        </button>
       </li>
     {/each}
   </ul>
   <div id="switch-history-controller">
-    <a href="#" id="prev-history-page" on:click={handlePrevPage}>Previous</a>
-    <a href="#" id="next-history-page" on:click|preventDefault={handleNextPage}>Next</a>
+    <button type="button" id="prev-history-page" on:click={handlePrevPage}>Previous</button>
+    <button type="button" id="next-history-page" on:click={handleNextPage}>Next</button>
   </div>
 </div>
 
@@ -124,11 +124,24 @@
   .history-card {
     width: calc((100% / 4) - 4px);
     overflow: hidden;
-    padding: 25px;
+    padding: 0;
     background-color: rgb(225, 225, 225);
     border: 2px solid rgb(159, 159, 159);
     border-radius: 8px;
+  }
+
+  .history-card-btn {
+    width: 100%;
+    padding: 25px;
+    background: none;
+    border: none;
     cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+  }
+
+  .history-card-btn:hover {
+    background-color: rgb(215, 215, 215);
   }
 
   .history-card h3 {
@@ -147,15 +160,18 @@
     justify-content: space-between;
   }
 
-  #switch-history-controller a {
+  #switch-history-controller button {
     color: black;
-    text-decoration: none;
+    background-color: white;
     padding: 8px 16px;
     border: 1px solid rgb(210, 68, 68);
     border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
   }
 
-  #switch-history-controller a:hover {
+  #switch-history-controller button:hover {
     background-color: rgb(210, 68, 68);
     color: white;
   }
