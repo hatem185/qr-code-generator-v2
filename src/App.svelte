@@ -20,6 +20,7 @@
     numberOfPages,
     customPrefix,
     customSuffix,
+    customIncludeDash,
     boxSuffix,
     showAllPages
   } from './stores';
@@ -88,7 +89,8 @@
             currentType,
             get(customPrefix).toUpperCase(),
             get(customSuffix).toUpperCase(),
-            get(boxSuffix)
+            get(boxSuffix),
+            get(customIncludeDash)
           );
 
           let data;
@@ -100,7 +102,8 @@
             data = createQRCustomData(
               codeNumber,
               get(customPrefix).toUpperCase(),
-              get(customSuffix).toUpperCase()
+              get(customSuffix).toUpperCase(),
+              get(customIncludeDash)
             );
           }
 

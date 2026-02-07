@@ -40,6 +40,7 @@ export const qtyCode = writable("");
 export const numberOfPages = writable("");
 export const customPrefix = writable("");
 export const customSuffix = writable("");
+export const customIncludeDash = writable(true);
 export const boxSuffix = writable("BN");
 
 // UI State

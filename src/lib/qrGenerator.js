@@ -4,18 +4,19 @@ import { CONFIG } from './constants';
 /**
  * Generates the text content for QR code display
  */
-export function getQRCodeTextContent(code, type, customPrefix = "", customSuffix = "", boxSuffix = "BN") {
+export function getQRCodeTextContent(code, type, customPrefix = "", customSuffix = "", boxSuffix = "BN", includeDash = true) {
   const typeLower = type.toLowerCase();
+  const separator = includeDash ? "-" : "";
   
   if (typeLower === "box") {
     return `BX${code}${boxSuffix}`;
   } else if (typeLower === "custom") {
     let result = code;
     if (customPrefix) {
-      result = `${customPrefix}-${result}`;
+      result = `${customPrefix}${separator}${result}`;
     }
     if (customSuffix) {
-      result = `${result}-${customSuffix}`;
+      result = `${result}${separator}${customSuffix}`;
     }
     return result;
   }
@@ -60,13 +61,14 @@ export function createQROrdersData(initialNumber, type, client, format = "json")
 /**
  * Creates QR data for Custom type (plain text, no JSON)
  */
-export function createQRCustomData(initialNumber, customPrefix = "", customSuffix = "") {
+export function createQRCustomData(initialNumber, customPrefix = "", customSuffix = "", includeDash = true) {
+  const separator = includeDash ? "-" : "";
   let result = initialNumber.toString();
   if (customPrefix) {
-    result = `${customPrefix}-${result}`;
+    result = `${customPrefix}${separator}${result}`;
   }
   if (customSuffix) {
-    result = `${result}-${customSuffix}`;
+    result = `${result}${separator}${customSuffix}`;
   }
   return result;
 }

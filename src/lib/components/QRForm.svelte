@@ -6,6 +6,7 @@
     numberOfPages,
     customPrefix,
     customSuffix,
+    customIncludeDash,
     boxSuffix,
     boxLayoutMode,
     customLayoutMode,
@@ -191,8 +192,8 @@
 
     <div id="custom-options-wrapper">
       <div class="custom-format-info">
-        <p><strong>Custom Format:</strong> Prefix + Number + Suffix</p>
-        <p class="format-example">Example: A111C → A (prefix) + 111 (number) + C (suffix)</p>
+        <p><strong>Custom Format:</strong> Prefix {$customIncludeDash ? '-' : ''} Number {$customIncludeDash ? '-' : ''} Suffix</p>
+        <p class="format-example">Example: {$customIncludeDash ? 'A-111-C' : 'A111C'}</p>
       </div>
       <div class="custom-inputs-row">
         <div class="input-wrapper">
@@ -219,6 +220,15 @@
             maxlength="5" 
           />
         </div>
+      </div>
+      <div class="dash-toggle">
+        <label class="checkbox-label">
+          <input 
+            type="checkbox" 
+            bind:checked={$customIncludeDash}
+          />
+          <span>Include dash separator (-)</span>
+        </label>
       </div>
     </div>
   {/if}
