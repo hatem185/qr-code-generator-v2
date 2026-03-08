@@ -46,9 +46,9 @@
       "Please enter the starting code within the specified range for generation"
     );
     
-    const typeLower = item.type.toLowerCase();
+    const typeLower = item.type?.toLowerCase?.() ?? "";
     if (typeLower === "box") {
-      boxSuffix.set(item.suffix);
+      boxSuffix.set(item.suffix ?? "BN");
       qrType.set(QR_TYPES.BOX);
     } else if (typeLower === "orders") {
       qrType.set(QR_TYPES.ORDERS);

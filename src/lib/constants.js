@@ -16,3 +16,4 @@ export const QR_TYPES = {
   CUSTOM: "Custom"
 };
 
+

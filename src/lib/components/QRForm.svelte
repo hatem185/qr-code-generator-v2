@@ -23,7 +23,7 @@
   
   export let onGenerate;
 
-  let boxSuffixOptions = ["BN", "ZW", "MS", "WA", "SB", "AG", "KF", "TS", "MJ", "RJ", "TJ"];
+  let boxSuffixOptions = ["BN", "ZW", "MS", "WA", "SB", "AG", "KF", "TS", "MJ", "RJ", "TJ", "TH", "TZ"];
 
   $: isBox = $qrType.toLowerCase() === "box";
   $: isCustom = $qrType.toLowerCase() === "custom";
