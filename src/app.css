@@ -78,6 +78,11 @@ ul {
   flex: 1;
 }
 
+#suffix-qr-code-wrapper .suffix-custom-input {
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
 #generate-button {
   background-color: rgb(210, 68, 68);
   cursor: pointer;

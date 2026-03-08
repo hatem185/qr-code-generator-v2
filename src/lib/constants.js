@@ -16,4 +16,5 @@ export const QR_TYPES = {
   CUSTOM: "Custom"
 };
 
+export const BOX_SUFFIX_OPTIONS = ["BN", "ZW", "MS", "WA", "SB", "AG", "KF", "TS", "MJ", "RJ", "TJ", "TH", "TZ", "Other"];
 

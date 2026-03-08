@@ -8,6 +8,7 @@
     customSuffix,
     customIncludeDash,
     boxSuffix,
+    boxSuffixCustom,
     boxLayoutMode,
     customLayoutMode,
     ordersFormat,
@@ -18,12 +19,10 @@
   } from '../../stores';
   import { saveToStorage } from '../utils';
   import { getLatestCode, checkRangeInHistory } from '../api';
-  import { CONFIG } from '../constants';
+  import { CONFIG, BOX_SUFFIX_OPTIONS } from '../constants';
   import QRTypeSelector from './QRTypeSelector.svelte';
   
   export let onGenerate;
-
-  let boxSuffixOptions = ["BN", "ZW", "MS", "WA", "SB", "AG", "KF", "TS", "MJ", "RJ", "TJ", "TH", "TZ"];
 
   $: isBox = $qrType.toLowerCase() === "box";
   $: isCustom = $qrType.toLowerCase() === "custom";
@@ -68,6 +67,11 @@
   function validateForm() {
     if (!($initialSerialNumber.trim().length > 0)) {
       alertMessage.set({ message: "Please enter the initial Serial Number", type: "alert-error" });
+      return false;
+    }
+
+    if (isBox && $boxSuffix === "Other" && !$boxSuffixCustom.trim()) {
+      alertMessage.set({ message: "Please enter a suffix when Other is selected", type: "alert-error" });
       return false;
     }
     
@@ -299,10 +303,20 @@
         <h5 class="label-text">Suffix</h5>
       </label>
       <select id="suffix-qr-code" bind:value={$boxSuffix}>
-        {#each boxSuffixOptions as option}
+        {#each BOX_SUFFIX_OPTIONS as option}
           <option value={option}>{option}</option>
         {/each}
       </select>
+      {#if $boxSuffix === "Other"}
+        <input
+          type="text"
+          id="suffix-qr-code-custom"
+          class="suffix-custom-input"
+          placeholder="Type suffix (e.g. AB)"
+          bind:value={$boxSuffixCustom}
+          maxlength="5"
+        />
+      {/if}
     </div>
   {/if}
 

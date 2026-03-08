@@ -1,9 +1,9 @@
 <script>
   import { onMount } from 'svelte';
-  import { qrHistoryData, currentHistoryPage, qrType, customPrefix, customSuffix, boxSuffix, initialSerialNumber, qtyCode } from '../../stores';
+  import { qrHistoryData, currentHistoryPage, qrType, customPrefix, customSuffix, boxSuffix, boxSuffixCustom, initialSerialNumber, qtyCode } from '../../stores';
   import { loadHistories } from '../api';
   import { formatTimestamp } from '../utils';
-  import { CONFIG, QR_TYPES } from '../constants';
+  import { CONFIG, QR_TYPES, BOX_SUFFIX_OPTIONS } from '../constants';
 
   export let onHistoryItemClick;
 
@@ -48,7 +48,14 @@
     
     const typeLower = item.type?.toLowerCase?.() ?? "";
     if (typeLower === "box") {
-      boxSuffix.set(item.suffix ?? "BN");
+      const presetSuffixes = BOX_SUFFIX_OPTIONS.filter((o) => o !== "Other");
+      if (item.suffix != null && presetSuffixes.includes(item.suffix)) {
+        boxSuffix.set(item.suffix);
+        boxSuffixCustom.set("");
+      } else {
+        boxSuffix.set("Other");
+        boxSuffixCustom.set(item.suffix || "");
+      }
       qrType.set(QR_TYPES.BOX);
     } else if (typeLower === "orders") {
       qrType.set(QR_TYPES.ORDERS);

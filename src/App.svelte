@@ -22,6 +22,7 @@
     customSuffix,
     customIncludeDash,
     boxSuffix,
+    boxSuffixCustom,
     showAllPages
   } from './stores';
   import { setBaseUrl, loadFromStorage, saveToStorage } from './lib/utils';
@@ -77,6 +78,9 @@
     const currentType = get(qrType);
     const typeLower = currentType.toLowerCase();
     const client = "Sabil";
+    const effectiveBoxSuffix = get(boxSuffix) === "Other"
+      ? get(boxSuffixCustom).trim().toUpperCase()
+      : get(boxSuffix);
 
     setTimeout(async () => {
       const codes = [];
@@ -89,7 +93,7 @@
             currentType,
             get(customPrefix).toUpperCase(),
             get(customSuffix).toUpperCase(),
-            get(boxSuffix),
+            effectiveBoxSuffix,
             get(customIncludeDash)
           );
 
@@ -97,7 +101,7 @@
           if (typeLower === "orders") {
             data = createQROrdersData(codeNumber, currentType, client, get(ordersFormat));
           } else if (typeLower === "box") {
-            data = createQRBoxData(codeNumber, currentType, client, get(boxSuffix), get(boxFormat));
+            data = createQRBoxData(codeNumber, currentType, client, effectiveBoxSuffix, get(boxFormat));
           } else if (typeLower === "custom") {
             data = createQRCustomData(
               codeNumber,
@@ -154,7 +158,9 @@
     let prefix = null;
     
     if (typeLower === "box") {
-      suffix = get(boxSuffix);
+      suffix = get(boxSuffix) === "Other"
+        ? get(boxSuffixCustom).trim().toUpperCase()
+        : get(boxSuffix);
       prefix = "BX";
     } else if (typeLower === "custom") {
       suffix = get(customSuffix).toUpperCase() || null;

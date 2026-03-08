@@ -42,6 +42,7 @@ export const customPrefix = writable("");
 export const customSuffix = writable("");
 export const customIncludeDash = writable(true);
 export const boxSuffix = writable("BN");
+export const boxSuffixCustom = writable("");
 
 // UI State
 export const showLoadingIndicator = writable(false);
